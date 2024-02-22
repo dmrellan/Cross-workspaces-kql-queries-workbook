@@ -1,17 +1,15 @@
 # Cross-workspaces-kql-queries-workbook
-Cross-workspace KQL queries workbook
 
-AIDA
-A
-Alguna vez te has encontrado en la necesidad de ejecutar una query KQL contra muchos o todos tus Log Analytics workspaces?
+Have you ever needed to run a Kusto Query Language (KQL) query against **multiple** (or all) of your Log Analytics workspaces?
 
-I
-Probablemente ya sabrás que esto lo se llaman cross-queries (https://learn.microsoft.com/en-us/azure/azure-monitor/logs/cross-workspace-query) y podrás ejecutarlas directamente teniendo esto en mente a la hora de escribir la query contemplándolo en la sintaxis o, incluso, utilizando el propio portal de Azure modificando el scope de la query. Son soluciones perfectamente válidas y eficaces, pero no siempre las más eficientes ya que la primera obliga a complicar un poco la query añadiendo líneas para atacar a cada workspace y unificar los resultados y la segunda se vuelve poco útil cuando el número de workspaces es muy alto (debido a la necesidad de seleccionar uno a uno los workspaces). Pero hay una tercera opción, utilizar Azure Workbooks, y esta es en la que me quiero enfocar.
+If so, you probably know this can be achieved through [**cross-workspace queries**](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/cross-workspace-query). These queries can be executed directly using the appropriate KQL syntax or modifying the query scope from the Azure portal. Although both solutions are valid and effective, they are, not always, the most efficient way. For example, if the number of workspaces is high, selecting them one by one can be impractical. However, a third option will save us time: **using Azure Workbooks**.
 
-D
-Hoy vengo aquí a compartir contigo un Azure workbook sencillo pero que te ahorrará mucho tiempo si necesitas hacer esta tarea varias veces. Como puedes ver más abajo se trata de un workbook con tres parámetros típicos (suscripciones, workspaces y time range) y un cuarto en el que tendremos que escribir una KQL query. El resultado en la tabla a continuación será el de ejecutar dicha query contra todos los log analytics seleccionados (cross-workspace query) unificando los resultados. De esta forma sólo necesitarás consultar la tabla o exportarla a excel para tratar los resultados.
+In this article, I want to share a simple but very useful Azure Workbook to save time if you need to run KQL queries on multiple Log Analytics workspaces. As you can see below, the workbook consists of four parameters: subscriptions, workspaces, time range, and a **KQL query**. By writing the query and clicking outside the parameter, a cross-query will be run against all the selected Log Analytics workspaces, unifying the results in a table. In this way, you can quickly consult or export the results.
 
-A
-Como siempre, el código workbook lo encontrarás en este mismo artículo en la carpeta materiales. Disfrútalo!
-NOTA: Recuerda que el límite máximo de workspaces para una kql query son 100 en cada ejecución. Por lo que si tienes más de 100 workspaces (https://learn.microsoft.com/en-us/azure/azure-monitor/logs/cross-workspace-query#limitations)deberás hacer varias ejecuciones. 
-Cualquier feedback al respecto será bienvenido.
+![image](https://github.com/dmrellan/Cross-workspaces-kql-queries-workbook/assets/35997289/a090b9df-5086-4234-b8b4-d2c7b83105b1)
+
+
+You can find the workbook code in the **materials** folder of this article. Enjoy it! But remember, the maximum limit of workspaces for a cross-query is 100 in each execution. Therefore, if you have [over 100 workspaces](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/cross-workspace-query#limitations), you must perform several executions.
+
+Any comments or suggestions are welcome.
+
