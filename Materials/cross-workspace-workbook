@@ -1,0 +1,187 @@
+{
+  "version": "Notebook/1.0",
+  "items": [
+    {
+      "type": 1,
+      "content": {
+        "json": "# Cross-workspace KQL queries workbook"
+      },
+      "name": "text - 3"
+    },
+    {
+      "type": 9,
+      "content": {
+        "version": "KqlParameterItem/1.0",
+        "crossComponentResources": [
+          "{Subs}"
+        ],
+        "parameters": [
+          {
+            "id": "91220871-f187-4d9a-85c2-a47526366a94",
+            "version": "KqlParameterItem/1.0",
+            "name": "Subs",
+            "type": 6,
+            "isRequired": true,
+            "multiSelect": true,
+            "quote": "'",
+            "delimiter": ",",
+            "query": "summarize by subscriptionId\r\n| project value = strcat(\"/subscriptions/\",subscriptionId), label = subscriptionId\r\n| order by value asc",
+            "crossComponentResources": [
+              "value::all"
+            ],
+            "typeSettings": {
+              "additionalResourceOptions": [
+                "value::all"
+              ],
+              "showDefault": false
+            },
+            "timeContext": {
+              "durationMs": 86400000
+            },
+            "queryType": 1,
+            "resourceType": "microsoft.resourcegraph/resources",
+            "value": [
+              "value::all"
+            ],
+            "label": "Azure Subscription"
+          },
+          {
+            "id": "45233f67-2143-4d57-bac8-f7950a61aa80",
+            "version": "KqlParameterItem/1.0",
+            "name": "ws",
+            "label": "Log Analytics workspace",
+            "type": 5,
+            "isRequired": true,
+            "multiSelect": true,
+            "quote": "'",
+            "delimiter": ",",
+            "query": "where type =~ 'microsoft.operationalinsights/workspaces'\r\n| project id\r\n| order by id asc",
+            "crossComponentResources": [
+              "{Subs}"
+            ],
+            "typeSettings": {
+              "additionalResourceOptions": [
+                "value::all"
+              ],
+              "showDefault": false
+            },
+            "timeContext": {
+              "durationMs": 86400000
+            },
+            "queryType": 1,
+            "resourceType": "microsoft.resourcegraph/resources",
+            "value": [
+              "value::all"
+            ]
+          },
+          {
+            "id": "abbcf6e6-1141-4d5b-984c-10aedd210281",
+            "version": "KqlParameterItem/1.0",
+            "name": "TimeRange",
+            "type": 4,
+            "typeSettings": {
+              "selectableValues": [
+                {
+                  "durationMs": 3600000
+                },
+                {
+                  "durationMs": 86400000
+                },
+                {
+                  "durationMs": 604800000
+                },
+                {
+                  "durationMs": 2592000000
+                },
+                {
+                  "durationMs": 5184000000
+                },
+                {
+                  "durationMs": 7776000000
+                }
+              ],
+              "allowCustom": true
+            },
+            "value": {
+              "durationMs": 2592000000
+            }
+          }
+        ],
+        "style": "pills",
+        "queryType": 1,
+        "resourceType": "microsoft.resourcegraph/resources"
+      },
+      "name": "parameters - 0"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "Write your Kusto Query Language (KQL) query, and it will be run against all Log Analytics workspaces (cross-query) defined in the _Log Analytics workspace:_ parameter.\r\nResults will be shown in the below table with the possibility to export them to Excel file."
+      },
+      "name": "text - 4"
+    },
+    {
+      "type": 9,
+      "content": {
+        "version": "KqlParameterItem/1.0",
+        "parameters": [
+          {
+            "id": "d50fa2b3-833d-40e8-a727-d25c51c97e25",
+            "version": "KqlParameterItem/1.0",
+            "name": "KQLQuery",
+            "label": "KQL Query",
+            "type": 1,
+            "isRequired": true,
+            "typeSettings": {
+              "multiLineText": true,
+              "editorLanguage": "kql",
+              "multiLineHeight": 10
+            },
+            "timeContext": {
+              "durationMs": 86400000
+            },
+            "value": ""
+          }
+        ],
+        "style": "pills",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces"
+      },
+      "name": "parameters - 3"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "{KQLQuery}\r\n",
+        "size": 0,
+        "showAnalytics": true,
+        "title": "Cross-workspace query results",
+        "timeContextFromParameter": "TimeRange",
+        "showExportToExcel": true,
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{ws}"
+        ],
+        "sortBy": []
+      },
+      "name": "query - 1",
+      "styleSettings": {
+        "showBorder": true
+      }
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "_Azure Workbook developed by [**Diego Martínez Rellán**](https://github.com/dmrellan)_"
+      },
+      "name": "text - 5"
+    }
+  ],
+  "fallbackResourceIds": [
+    "Azure Monitor"
+  ],
+  "fromTemplateId": "community-Workbooks/Azure Monitor - Agents/Agent Migration Tracker",
+  "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
+}
